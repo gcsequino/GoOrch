@@ -1,35 +1,39 @@
 package main
 
 import (
-    "errors"
-    "fmt"
-    "io"
-    "net/http"
-    "os"
+	"errors"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
 )
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
-    fmt.Printf("got / request\n")
-    io.WriteString(w, "Hello nerds ;)\n")
+	fmt.Printf("got / request\n")
+	io.WriteString(w, "Hello nerds ;)\n")
 }
 
 func getHello(w http.ResponseWriter, r *http.Request) {
-    fmt.Printf("get /hello request\n")
-    io.WriteString(w, "Hello, HTTP!\n")
+	fmt.Printf("get /hello request\n")
+	io.WriteString(w, "Hello, HTTP!\n")
+}
+
+func getBye(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("get /bye request\n")
+	io.WriteString(w, "Bye, HTTP!\n")
+	os.Exit(1)
 }
 
 func main() {
-    // http.HandleFunc("/", getRoot)
-    // http.HandleFunc("/hello", getHello)
-    mux := http.NewServeMux()
-    mux.HandleFunc("/", getRoot)
-    mux.HandleFunc("/hello", getHello)
+	http.HandleFunc("/", getRoot)
+	http.HandleFunc("/hello", getHello)
+	http.HandleFunc("/bye", getBye)
 
-    err := http.ListenAndServe(":3333", mux)
-    if errors.Is(err, http.ErrServerClosed) {
-        fmt.Printf("server closed\n")
-    } else if err != nil {
-        fmt.Printf("error startsing the server: %s\n", err)
-        os.Exit(1)
-    }
+	err := http.ListenAndServe(":3333", nil)
+	if errors.Is(err, http.ErrServerClosed) {
+		fmt.Printf("server closed\n")
+	} else if err != nil {
+		fmt.Printf("error starting server: %s\n", err)
+		os.Exit(1)
+	}
 }
