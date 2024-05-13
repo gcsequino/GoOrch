@@ -26,18 +26,6 @@ func getBye(w http.ResponseWriter, r *http.Request) {
 	os.Exit(1)
 }
 
-func main() {
-	http.HandleFunc("/", getRoot)
-	http.HandleFunc("/hello", getHello)
-	http.HandleFunc("/bye", getBye)
-
-	err := http.ListenAndServe(":3333", nil)
-	if errors.Is(err, http.ErrServerClosed) {
-		fmt.Printf("server closed\n")
-	} else if err != nil {
-		fmt.Printf("error starting server: %s\n", err)
-}
-
 func postName(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		http.Error(w, "Invalid request method", http.StatusBadRequest)
