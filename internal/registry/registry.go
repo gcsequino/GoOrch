@@ -1,4 +1,4 @@
-package main
+package registry
 
 import (
 	"errors"
@@ -49,7 +49,8 @@ func longRunningTask(w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 }
 
-func main() {
+func run() {
+	fmt.Println("Hello from registry!")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", getRoot)
 	mux.HandleFunc("/hello", getHello)
