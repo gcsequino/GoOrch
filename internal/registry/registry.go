@@ -10,6 +10,10 @@ import (
 	"time"
 )
 
+func Hello() {
+	fmt.Println("Hello from registry!")
+}
+
 func getRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("got / request\n")
 	io.WriteString(w, "Hello nerds ;)\n")
