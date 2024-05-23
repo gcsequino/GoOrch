@@ -4,6 +4,6 @@ import (
 	"fmt"
 )
 
-func run() {
+func hello() {
 	fmt.Println("Hello from node!")
 }
