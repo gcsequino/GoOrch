@@ -10,8 +10,8 @@ import (
 	"time"
 )
 
-func Hello() {
-	fmt.Println("Hello from registry!")
+func Hello(port string) {
+	fmt.Printf("Hello from registry on port %s!\n", port)
 }
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
